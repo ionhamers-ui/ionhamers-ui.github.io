@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ion Hamers | Economics Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Inviting & Professional Dark Green Matte Palette */
+        :root {
+            --bg-color: #F8F9F7;         
+            --text-main: #2A302C;        
+            --text-muted: #5C6660;       
+            --accent-color: #26593F;     
+            --accent-hover: #1A3E2C;     
+            --card-bg: #FFFFFF;          
+            --border-color: #E0E5E1;     
+            
+            /* Bookshelf & Vintage Book Colors */
+            --shelf-color: #B5C0B9;
+            --shelf-shadow: #8A968F;
+            --book-1-color: #1A3626; 
+            --book-2-color: #2D1A18; 
+            --gold-foil: #D4AF37;    
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation / Header */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .logo-section p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 1rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color); 
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Library Container */
+        .library-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem 2rem;
+        }
+
+        /* Virtual Bookshelf */
+        .shelf-wrapper {
+            margin: 3rem auto;
+            max-width: 650px; 
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .instruction-text {
+            font-family: 'Inter', sans-serif;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .shelf {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            border-bottom: 16px solid var(--shelf-color);
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .shelf::after {
+            content: '';
+            position: absolute;
+            bottom: -22px;
+            left: -15px;
+            right: -15px;
+            height: 6px;
+            background: var(--shelf-shadow);
+            border-radius: 3px;
+        }
+
+        /* Larger CSS Monstera Plant */
+        .plant {
+            position: relative;
+            width: 130px;
+            height: 180px;
+            margin-right: 45px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            z-index: 5;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .plant:hover {
+            transform: scale(1.05) translateY(-5px);
+            filter: drop-shadow(0 10px 15px rgba(38, 89, 63, 0.15));
+        }
+
+        .leaves {
+            position: relative;
+            width: 100%;
+            height: 120px;
+        }
+
+        /* Matte Monstera leaf shapes */
+        .leaf {
+            position: absolute;
+            border-radius: 50% 50% 10% 50%; 
+            box-shadow: inset 3px 3px 6px rgba(255,255,255,0.05), 4px 6px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Deep, flat matte green tones */
+        .leaf-1 { width: 70px; height: 80px; bottom: 20px; left: -10px; transform: rotate(-40deg); background-color: #2F4C3B; z-index: 1;}
+        .leaf-2 { width: 95px; height: 105px; bottom: 45px; left: 15px; transform: rotate(5deg); background-color: #3B5E48; z-index: 4;}
+        .leaf-3 { width: 75px; height: 85px; bottom: 35px; left: 65px; transform: rotate(50deg); background-color: #223B2D; z-index: 2;}
+        .leaf-4 { width: 60px; height: 70px; bottom: 10px; left: 75px; transform: rotate(70deg); background-color: #436A51; z-index: 1;}
+        .leaf-5 { width: 55px; height: 60px; bottom: -5px; left: 0px; transform: rotate(-60deg); background-color: #1A3023; z-index: 3;}
+
+        /* Matte warm clay pot */
+        .pot {
+            width: 65px;
+            height: 55px;
+            background: linear-gradient(to right, #9A776B, #B8978A, #7A5B50);
+            border-radius: 5px 5px 20px 20px;
+            position: relative;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.15), 5px 0 8px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+
+        .pot-lip {
+            width: 75px;
+            height: 12px;
+            background: linear-gradient(to right, #A98579, #C8A698, #89675B);
+            border-radius: 3px;
+            position: absolute;
+            top: -6px;
+            left: -5px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+        }
+
+        /* About Me Signpost inserted in the pot */
+        .signpost {
+            position: absolute;
+            bottom: 35px; /* Stick placed in the dirt */
+            left: -35px; 
+            z-index: 6;
+            transform: rotate(-8deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none; /* Let the click pass through to the plant */
+        }
+
+        .sign-board {
+            background-color: #FFF;
+            color: var(--accent-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+            border: 2px solid var(--accent-color);
+            border-radius: 4px;
+            margin-bottom: -2px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .sign-stick {
+            width: 5px;
+            height: 45px;
+            background-color: #5C4A3D;
+            border-radius: 2px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Highlight the sign when the user hovers over the plant */
+        .plant:hover .sign-board {
+            background-color: var(--accent-color);
+            color: #FFF;
+            border-color: #FFF;
+            transform: scale(1.05);
+        }
+
+        /* Vintage Books */
+        .book {
+            width: 95px;     
+            height: 380px;   
+            margin: 0 20px;
+            cursor: pointer;
+            border-radius: 6px 6px 3px 3px;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            box-shadow: inset -10px 0 20px rgba(0,0,0,0.6), 
+                        inset 6px 0 10px rgba(255,255,255,0.15), 
+                        5px 0 12px rgba(0,0,0,0.3);
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom,
+                transparent 12%,
+                rgba(0,0,0,0.7) 12%, rgba(255,255,255,0.15) 13%, transparent 14%,
+                transparent 25%,
+                rgba(0,0,0,0.7) 25%, rgba(255,255,255,0.15) 26%, transparent 27%,
+                transparent 78%,
+                rgba(0,0,0,0.7) 78%, rgba(255,255,255,0.15) 79%, transparent 80%,
+                transparent 88%,
+                rgba(0,0,0,0.7) 88%, rgba(255,255,255,0.15) 89%, transparent 90%
+            );
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 1;
+        }
+
+        .book-1 { background-color: var(--book-1-color); }
+        .book-2 { background-color: var(--book-2-color); height: 360px; }
+
+        .book:hover {
+            transform: translateY(-20px);
+            box-shadow: inset -10px 0 20px rgba(0,0,0,0.6), 
+                        inset 6px 0 10px rgba(255,255,255,0.15), 
+                        0 20px 25px rgba(0,0,0,0.2);
+        }
+
+        .book.active {
+            transform: translateY(-30px);
+            box-shadow: inset -10px 0 20px rgba(0,0,0,0.6), 
+                        inset 6px 0 10px rgba(255,255,255,0.15), 
+                        0 25px 30px rgba(38, 89, 63, 0.3);
+        }
+
+        .book-spine-text {
+            writing-mode: vertical-rl;
+            font-family: 'Lora', serif;
+            color: var(--gold-foil);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            padding: 30px 0;
+            text-align: center;
+            white-space: normal; 
+            max-height: 85%;     
+            z-index: 2;          
+            text-shadow: -1px -1px 1px rgba(0,0,0,0.8), 
+                          1px 1px 1px rgba(255,255,255,0.1);
+        }
+
+        /* Reading Area */
+        .reading-area {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px; 
+            padding: 3.5rem;
+            margin-top: 5rem;
+            display: none; 
+            box-shadow: 0 12px 30px rgba(38, 89, 63, 0.05);
+            animation: fadeInRead 0.6s ease forwards;
+        }
+
+        @keyframes fadeInRead {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .essay-content-wrapper {
+            display: none; 
+        }
+
+        .essay-content-wrapper.active {
+            display: block;
+        }
+
+        /* Typography inside Reading Area */
+        .reading-area h3 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .reading-area .essay-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .essay-body {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #38403B;
+        }
+
+        .essay-body p {
+            margin-bottom: 1.8rem;
+        }
+
+        .essay-body h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            margin: 3rem 0 1rem 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .essay-body ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .essay-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Profile Layout specific adjustments */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-box {
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .contact-box h4 {
+            margin-top: 0 !important;
+        }
+
+        .contact-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .contact-box li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Placeholder */
+        .empty-desk-state {
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 4rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer Credit */
+        .footer-credit {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #8A968F;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-credit span {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-section">
+            <h1>Ion Hamers</h1>
+            <p>Independent Economic Research</p>
+        </div>
+        <div class="contact-info">
+            <span style="color: var(--text-muted);">Based in Swansea, Wales</span>
+            <a href="mailto:Ionhamers@gmail.com">Ionhamers@gmail.com</a>
+            <a href="tel:07407503806">07407503 806</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Exploring Global Economic Engines</h2>
+        <p>A portfolio of independent research analyzing macro-economic trends, developmental investments, and the contrasting fiscal architectures shaping our modern world.</p>
+    </section>
+
+    <main class="library-container">
+
+        <div class="shelf-wrapper">
+            <p class="instruction-text">Click on the book to open the article</p>
+            <div class="shelf">
+                
+                <div class="plant" onclick="openProfile()" title="Click to view my profile">
+                    <div class="signpost">
+                        <div class="sign-board">About Me</div>
+                        <div class="sign-stick"></div>
+                    </div>
+                    <div class="leaves">
+                        <div class="leaf leaf-1"></div>
+                        <div class="leaf leaf-2"></div>
+                        <div class="leaf leaf-3"></div>
+                        <div class="leaf leaf-4"></div>
+                        <div class="leaf leaf-5"></div>
+                    </div>
+                    <div class="pot">
+                        <div class="pot-lip"></div>
+                    </div>
+                </div>
+
+                <div class="book book-1" onclick="openEssay('essay-1', this)">
+                    <span class="book-spine-text">US Consumption vs. China Investment</span>
+                </div>
+                <div class="book book-2" onclick="openEssay('essay-2', this)">
+                    <span class="book-spine-text">The BRI in Sub-Saharan Africa: An ISLM Analysis</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="empty-desk-state" id="empty-desk">The reading desk is empty. Select a volume or the plant from the shelf above.</p>
+
+        <article class="reading-area" id="reading-desk">
+            
+            <div class="essay-content-wrapper" id="profile-content">
+                <h3>Ion Hamers</h3>
+                <p class="essay-meta">Personal Profile & Contact Information</p>
+                
+                <div class="essay-body profile-grid">
+                    <div>
+                        <p>Hello! I am a 17-year-old student currently attending <strong>Olchfa Sixth Form</strong> in Swansea, Wales. I am highly passionate about macroeconomics, fiscal policy, and global development, which is why I am currently pursuing A-Levels in <strong>Further Mathematics, Economics, and Physics</strong>.</p>
+                        
+                        <p>Beyond academics, I am a highly dedicated athlete and proudly represent my country as a <strong>Team GB Basketball Athlete</strong>. The discipline, teamwork, and strategic problem-solving required on the court directly translate into how I approach my academic research and quantitative analysis.</p>
+                        
+                        <p>I am actively seeking <strong>further internship experience</strong> within the fields of economics, finance, or analytical research. I am eager to apply my mathematical background and economic understanding in a real-world environment, to learn from industry professionals, and to deepen my knowledge of global markets.</p>
+                    </div>
+
+                    <div class="contact-box">
+                        <h4>Contact Details</h4>
+                        <ul>
+                            <li><strong>Email:</strong> <br><a href="mailto:Ionhamers@gmail.com" style="color: var(--accent-color); text-decoration: none;">Ionhamers@gmail.com</a></li>
+                            <li><strong>Phone:</strong> <br><a href="tel:07407503806" style="color: var(--accent-color); text-decoration: none;">07407503 806</a></li>
+                            <li><strong>Location:</strong> <br>Swansea, Wales, UK</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="essay-content-wrapper" id="essay-1">
+                <h3>Exploring the different dynamics behind the US consumption-led economy and the China investment-led economy</h3>
+                <p class="essay-meta">Macroeconomics & Comparative Systems</p>
+                
+                <div class="essay-body">
+                    <p>The modern global economy revolves around two Powerhouses that have been under a growing tension for decades. These are China and the US. The two economies combined has a value of about 50 trillion USD GDP, accounting for almost half of the entire world’s GDP (as of 2025). This obviously means that any action from either side could ripple throughout all of global trade. One aspect that has raised my attention is the polar opposite economic engines that drive these economies.</p>
+                    <p>The economy of the US is driven by consumer demand, exemplified by the need for household goods, new technology and new fashion is an integral part of American culture, as part of the ‘American Dream’ that has been sought after ever since the great depression. On the other side of the Pacific, China has a largely Supply driven economy that has been on a steady path of growth since the opening up of the economy under Deng Xiaoping. These differences are not accidental, in my view they are rooted in centuries of distinct historical, political and institutional paths that the US and China have taken. We will explore these different economic models and conclude on which is the more sustainable for future growth, or how they both benefit of one and other.</p>
+                    <p>The US economy very simply put is a demand-driven economy with growth led by household consumption. One example, McDonalds has gone through a classic American growth. Aimed to fulfill families and grown to a world wide oligopoly in the fast food industry. McDonalds sells 2.36 billion burgers a year in the US. That equates to 6.9 burgers per capita annually (this happens to be 0.02% of the global beef supply spent on burgers in McDonalds America alone). This is a prime example of consumption in the US that has become popularized, household consumption takes up about 68-70% of the US GDP.</p>
+                    <p>Now compared to China, this figure seems very extreme as the number in China is hovering at 38-40% of GDP. China’s economy has historically been supply-driven, with growth led by investment, manufacturing and exports. the saying everything is made by China’ is age old and is partially true, almost 30% of all products are manufactured in China, as of 2024. This $4.66 trillion output is a large chunk of the entire world’s supply. The Chinese economy is becoming more and more self reliant, with the 15th 5 year plan (these are general plans set by the government to set out expectations and action for every 5 year period and has been ongoing since 1953, it’s similar to a manifesto) from 2026-30 aiming to massively increase consumption within China in an effort to become more self dependent. This seems somewhat similar to Trump’s plan to make the US more independent through the tariff air raid in order to move more producers to the US. In this race to independence, these two economic giants have opposing fiscal policies to fill in their gaps.</p>
+                    <p>Economic growth can be driven by demand side factors or supply side factors, this includes capital accumulation and productivity improvements and other PPF expanding factors. starting with Demand-side growth, household consumption (C), wages through low unemployment to fund spending and short run economic stabilizers. Now, for supply growth this shifts to Investment (I), Infrastructure building, human capital (something China doesn’t lack with a 1.4 billion population) and technological progress. Supply side growth focuses on long run productive capacity, growing the economy for the future.</p>
+                    <p style="text-align: center; font-size: 1.3rem; margin: 2rem 0; color: var(--accent-color);"><strong>GDP = C + I + G + (X-M)</strong></p>
+                    <p>This equation very usefully simplifies what we have been exploring so far. The most successful economy would have the optimum level of all factors mentioned, however this is very unlikely in the real world due to other un-described factors that will eventually affect GDP. This could be something like unexpected tariffs (sound familiar?) to government corruption. Lets break this down. consumption is dominant in the US, investment is China dominated with a public budget expenditure of about $4.12 trillion. Finally, net exports (X-M) has been positive since opening up to international trade in the 1970s. These differences in GDP composition provides us with a useful framework for comparing growth across economies.</p>
+                    <p>Now we can delve into the history of these economies starting with the US. Since WW1, the US has had a head start in recovery because of their intact infrastructure, rising real wages and rising middle class. It was in recent times (1890s) that the US became the most productive economy in the world, almost double of the British empire. It wasn’t until 1916 that the US overtook the British empire and became the largest economic power in the world. Therefore when the US emerged as the most massive economy world wide after the world war, it wasn’t much of a surprise, and the growth trajectory showed a time of rapid developing and technology advances for the US. From the 1950s onwards, the American dream was set in stone. Suburban families with all the newest things in stores. This was further supported by the great credit expansion and financial liberalization, where credit cards, mortgages and even buying stocks on the margin made household consumption easier than ever. Even during the 1980’s when the US saw a flatlining of wages rising, household debt went through the roof allowing consumption even in economically bleak times. The US economy built off consumerism was hence set in stone.</p>
+                    <p>The brief history of China’s economic story starts much more recently in 1978 when China opened up their borders to international trade in some ‘special economic zones’ in 4 towns in the south east of China where the Chairman, Deng Xiao Ping opened trade to the rest of the world. This was China’s experimentation of capitalism, like dipping toes in a pool. Even in 2014, these SEZs contribute roughly 22% of all of China’s GDP annually. This was a break from a centrally planned economy that controlled the Chinese economy since 1949. ever since opening borders, China had an export-oriented industrialization small fishing villages rapidly morphed into international trade hubs where generational wealth was being built. Let’s take Shenzhen as our prime example. In 1990, the population rose from 250,000 to 400,000 in just one year alone. The number of factories tripled from 170 to 470 in the single year. In the peak of the ‘step into the new age’ China invested 45% of GDP annually, the global average was ~20%. The reasoning behind all this investment was due to three main reasons:</p>
+                    <ul>
+                        <li>High domestic savings</li>
+                        <li>State directed credit via state controlled banks</li>
+                        <li>Government push in investment in infrastructure</li>
+                    </ul>
+                    <p>It was clear that China had prioritized productive capacity over household consumption allowing growth at rates never seen before. This, however, came with the caveat of low domestic demand, exactly the opposite of the US’ struggle.</p>
+                    <p>As economies grow and and mature, continued injections through investment makes marginal returns much lower than through natural growth, however this method of growth is very rapid. Now we can through the strengths and weaknesses of these economic models. The US demand-led growth model is strong because of stable domestic demand and high speed technology development, hence the US being the leading technology developer in the world. The weaknesses include high trade deficits, causing enhancing national debt. The consumption seen in the US may seem great on the short-run but much of this consumption is fueled through loans which could cause instability in the future. Finally, any financial shock could cause consequences that are much more prevalent in the States than anywhere else. In 2008, this weakness was unleashed onto the population of the US, national debt rose from 9 trillion to 14 trillion in only 4 year, this is the same amount of debt accumulation as all the years between 1927 and 1997 (70 years)</p>
+                    <p>China’s economy has the strength of rapid capital accumulation that projected China to the forefront of global production. Infrastructure has become world class in a very short period in China, government investment in infrastructure hit $2.4 trillion in 2023, showing the extent of the fast-paced development throughout major provinces in China. The most widely known strength of China’s supply-led model is the export competitiveness. The net exports has created a trade surplus since the 1970s, exceeding $1 trillion in 2025. Now the weaknesses of supply-led growth includes government over investment which could very well be spent elsewhere, falling return on capital as seen in the recent slowing of China’s economic growth. Finally, China has a weak household consumption that has been mentioned before, causing a lack in demand throughout the country, which is the main problem being addressed in the 15th 5 year plan China unveiled in late 2025.</p>
+                    <p>As of 2026, the news points to a turning point for both economies, China’s growth spurt has come to a slowing pace and the housing market is in turmoil, with only 814.5 million square meters of new housing being sold, a 14.1% year on year decline. According to Goldman Sachs, the GDP of China has been on a 2% GDP shrinkage run since 2024 because of this. The Chinese government introducing the dual circulation plan to increase demand within the country also shows the magnitude of the problem of low consumption within China. The US’ efforts to re-shore to maximize GDP through tariffs also shows their efforts to turn the tides of their trade deficit. Furthermore, the US is sitting in a $38.7 trillion pool of debt which splits to roughly $115,400 per US citizen. the national debt to economy size ratio has recently surpassed the deficit seen in WW2. Recently, the US economy has also been under scrutiny for the increasing wealth concentration and inequality, the highest earning 1% in the US generates about 21% of pre-tax income, according to the current population survey (CPS). Both economies are attempting to become more centered in their economic models. The age of supply-led growth and demand-led growth is over, for successful economies to thrive, there must be a balance of both.</p>
+                    <p>In conclusion, the contrasting economic structures of the US and China is the product of historical and institutional differences. The starting points and the way these economies grew has led to substantial growth in both economies, making the US and China the largest economies in the world in 2026. For further growth, these extremist economic growth structures are not sustainable, in fact they are limited by the same system that allowed them to grow to the present size. For growth to be maintained, both side need to diversify methods of growth, which as of 2026 is becoming obvious to be the US’ plan going into the future.</p>
+                    <p>On a personal note I have been able to witness some of the two different types of economies, with this subject striking close to home. Having lived and traveled in China for many years I could see how well infrastructure has developed compared to many western countries such as the US. Investments that many western countries would struggle with, and also would have difficulties to implement due policy differences. Examples are the high speed railway system crossing China, modern airports, trade ports, and alternative energy.</p>
+                </div>
+            </div>
+
+            <div class="essay-content-wrapper" id="essay-2">
+                <h3>The Belt and Road Initiative in sub-Saharan Africa: Debt Trap or A Catalyst for Growth? An ISLM Analysis</h3>
+                <p class="essay-meta">IS-LM Modeling & International Development</p>
+                
+                <div class="essay-body">
+                    <p>The BRI is a huge exogenous injection into the receiving countries in Sub-Saharan Africa such as Ethiopia and Sudan where over $85 billion was invested into infrastructure, all funded by the Chinese Bridge and Road Initiative. The ISLM model is built with the IS curve – representing the goods market equilibrium and the LM curve which represents the money market. This massive investment shifts the IS curve to the right and directly shifts AD out as well as both C and I is changed during the initiative.</p>
+                    <p>Projects such as the Mombasa-Nairobi Railway are good examples that we can examine and apply the ISLM framework to. This 480-kilometre railway functions as a surge in investment (I) and government spending where the local government chose to co-fund the project. This would create a snowball multiplier effect as 46,000 new jobs were introduced to the labour markets leading to increased consumption and therefore derived labour demand from firms. This brings us on to the Money market side of the analysis as the demand for money would increase as a result of people earning more. As the central bank’s money supply is limited, the short run solution is to increase the price of money leading to significant rises in interest rates. As seen on the graph, the economy moves along the LM curve to the new equilibrium point where output is increased as well as the interest rate. The caveat to this is the crowding out effect as interest rates rise, local investments may lower. In able for this injection of investment to be a catalyst for growth, the economic growth caused by the new railway must be larger than the local private investments that were lost.</p>
+                    <h4>Critical Evaluation of the ISLM model</h4>
+                    <p>The IS-LM model provides a useful insight into the BRI and is a great starting point for visualising the impact of the Bridge and Road Initiative, however there are limitations when applied to the specific case of the BRI, first assumption being that the economy is closed. The IS-LM model assumes that internation trade is negligible, however, Sub-Saharan countries are very open, with their economies highly dependent on international trade. As most of the BRI funding is from China, the injections into the IS curve may leak out of the country quickly as most labour and materials are sourced in China. This would reduce the expected economic growth. Next, due to the IS-LM model being a Demand focused framework, the LRAS is overlooked, this is a huge downside of the IS-LM model in this case study as much of the BRI goals are to improve the supply side such as improving roads and ports to make trade cheaper. By only looking at the IS-LM, we cannot see the long run increased productivity.</p>
+                    <h4>Conclusion</h4>
+                    <p>Overall, the IS-LM is a great tool to visualise short term investment shock, the pairing of this and Supply side analysis as well would create a better well-rounded picture on the future of the Chinese investment into growth in Africa.</p>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ion Hamers. Based in Swansea, Wales.</p>
+        <p style="margin-top: 10px;">Contact: <a href="mailto:Ionhamers@gmail.com" style="color: var(--accent-color); text-decoration: none;">Ionhamers@gmail.com</a> | <a href="tel:07407503806" style="color: var(--accent-color); text-decoration: none;">07407503 806</a></p>
+        
+        <p class="footer-credit">Website designed by <span>Gemini Website Maker</span></p>
+    </footer>
+
+    <script>
+        function openEssay(essayId, bookElement) {
+            // Manage Active States
+            const allBooks = document.querySelectorAll('.book');
+            allBooks.forEach(b => b.classList.remove('active'));
+            bookElement.classList.add('active');
+
+            // Swap to Reading Desk
+            document.getElementById('empty-desk').style.display = 'none';
+            document.getElementById('reading-desk').style.display = 'block';
+
+            // Show Selected Content
+            const allContent = document.querySelectorAll('.essay-content-wrapper');
+            allContent.forEach(e => e.classList.remove('active'));
+            
+            document.getElementById(essayId).classList.add('active');
+
+            // Scroll to Content
+            setTimeout(() => {
+                document.getElementById('reading-desk').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        function openProfile() {
+            // Remove active states from all books
+            const allBooks = document.querySelectorAll('.book');
+            allBooks.forEach(b => b.classList.remove('active'));
+
+            // Swap to Reading Desk
+            document.getElementById('empty-desk').style.display = 'none';
+            document.getElementById('reading-desk').style.display = 'block';
+
+            // Show Profile Content
+            const allContent = document.querySelectorAll('.essay-content-wrapper');
+            allContent.forEach(e => e.classList.remove('active'));
+            
+            document.getElementById('profile-content').classList.add('active');
+
+            // Scroll to Content
+            setTimeout(() => {
+                document.getElementById('reading-desk').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
