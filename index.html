@@ -19,8 +19,9 @@
             /* Bookshelf & Vintage Book Colors */
             --shelf-color: #B5C0B9;
             --shelf-shadow: #8A968F;
-            --book-1-color: #1A3626; 
-            --book-2-color: #2D1A18; 
+            --book-1-color: #1A3626; /* Deep Vintage Green */
+            --book-2-color: #2D1A18; /* Burgundy Oxblood */
+            --book-3-color: #1C2A38; /* Slate Navy */
             --gold-foil: #D4AF37;    
         }
 
@@ -113,7 +114,7 @@
         /* Virtual Bookshelf */
         .shelf-wrapper {
             margin: 3rem auto;
-            max-width: 650px; 
+            max-width: 780px; /* Widened slightly to fit 3 books comfortably */
             text-align: center;
             padding-top: 30px;
         }
@@ -155,12 +156,12 @@
             border-radius: 3px;
         }
 
-        /* Larger CSS Monstera Plant */
+        /* Interactive CSS Monstera Plant */
         .plant {
             position: relative;
             width: 130px;
             height: 180px;
-            margin-right: 45px; 
+            margin-right: 35px; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -217,17 +218,17 @@
             box-shadow: 0 3px 5px rgba(0,0,0,0.2);
         }
 
-        /* About Me Signpost inserted in the pot */
+        /* "About Me" Signpost inside the pot */
         .signpost {
             position: absolute;
-            bottom: 35px; /* Stick placed in the dirt */
+            bottom: 35px;
             left: -35px; 
             z-index: 6;
             transform: rotate(-8deg);
             display: flex;
             flex-direction: column;
             align-items: center;
-            pointer-events: none; /* Let the click pass through to the plant */
+            pointer-events: none; 
         }
 
         .sign-board {
@@ -254,7 +255,6 @@
             box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Highlight the sign when the user hovers over the plant */
         .plant:hover .sign-board {
             background-color: var(--accent-color);
             color: #FFF;
@@ -264,9 +264,9 @@
 
         /* Vintage Books */
         .book {
-            width: 95px;     
+            width: 90px;     
             height: 380px;   
-            margin: 0 20px;
+            margin: 0 12px;
             cursor: pointer;
             border-radius: 6px 6px 3px 3px;
             position: relative;
@@ -300,8 +300,10 @@
             z-index: 1;
         }
 
-        .book-1 { background-color: var(--book-1-color); }
-        .book-2 { background-color: var(--book-2-color); height: 360px; }
+        /* Staggered organic book heights */
+        .book-1 { background-color: var(--book-1-color); height: 380px; }
+        .book-2 { background-color: var(--book-2-color); height: 355px; }
+        .book-3 { background-color: var(--book-3-color); height: 368px; }
 
         .book:hover {
             transform: translateY(-20px);
@@ -321,14 +323,14 @@
             writing-mode: vertical-rl;
             font-family: 'Lora', serif;
             color: var(--gold-foil);
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 700;
             letter-spacing: 1px;
             line-height: 1.4;
-            padding: 30px 0;
+            padding: 25px 0;
             text-align: center;
             white-space: normal; 
-            max-height: 85%;     
+            max-height: 88%;     
             z-index: 2;          
             text-shadow: -1px -1px 1px rgba(0,0,0,0.8), 
                           1px 1px 1px rgba(255,255,255,0.1);
@@ -408,7 +410,7 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Profile Layout specific adjustments */
+        /* Profile Layout adjustments */
         .profile-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -462,7 +464,7 @@
             font-size: 0.9rem;
         }
 
-        /* Footer Credit */
+        /* Footer Credit styling */
         .footer-credit {
             margin-top: 1.5rem;
             font-size: 0.8rem;
@@ -498,7 +500,7 @@
     <main class="library-container">
 
         <div class="shelf-wrapper">
-            <p class="instruction-text">Click on the book to open the article</p>
+            <p class="instruction-text">Click on a book to open an article</p>
             <div class="shelf">
                 
                 <div class="plant" onclick="openProfile()" title="Click to view my profile">
@@ -523,6 +525,9 @@
                 </div>
                 <div class="book book-2" onclick="openEssay('essay-2', this)">
                     <span class="book-spine-text">The BRI in Sub-Saharan Africa: An ISLM Analysis</span>
+                </div>
+                <div class="book book-3" onclick="openEssay('essay-3', this)">
+                    <span class="book-spine-text">The Macroeconomic Analysis of the AI Boom</span>
                 </div>
             </div>
         </div>
@@ -597,6 +602,49 @@
                 </div>
             </div>
 
+            <div class="essay-content-wrapper" id="essay-3">
+                <h3>The new productive Revolution or Market Mirage? The Macroeconomic analysis of the AI Boom</h3>
+                <p class="essay-meta">Macroeconomics & Speculative Markets</p>
+                
+                <div class="essay-body">
+                    <h4>Pretext</h4>
+                    <p>A joke amongst basketball economists is that every time the New York Knicks make the NBA finals, a market crash is imminent. This is usually a 20 year period, unfortunate for us Knicks supporters, but a comforting fact for economists. The last time the Knicks were in the finals, in 1999, the dot com crash wiped off $5 trillion from the Nasdaq composite index, and in 2026, The Knicks are back in the finals, leading me to question what this signals for the market and global economy.</p>
+
+                    <h4>Introduction</h4>
+                    <p>Robert Solow, a Nobel prize winning economist made an observation in 1987 that spooked economists for a decade: “You can see the computer age everywhere but in the productivity statistics.” Despite the personal computer changing the workplace forever in the West, the productivity of workers seemed to stay stagnant. Why was this? Firms were investing billions into revolutionary technology being added to workplaces. Shareholders were euphoric, reaching new highs daily. Still, by most macroeconomic measures, the economy hadn’t changed in the slightest. The dot com bubble burst wiped out trillions of dollars of paper wealth in 1999-2000 and yet it took another two decades for computing to make a meaningful change to GDP growth.</p>
+                    <p>Now in 2026, it seems we are living the same story, only with higher stakes and in an unrecognisable economy that is much faster. This ‘sneeze’ would not be the same as the dot com bubble, it would be much louder and spread across the world to new continents, impacting global markets. In 2025 AI investment was responsible for 30% of US GDP growth in the second quarter alone, 20% in the first quarter. AI related business growth surged to 18% annually in 2025, rocking the economy and fuelling a one percentage point increase in GDP growth (EY 2025). The major investors were Amazon, Meta, Alphabet and Microsoft. These major investors were projected to allocate $342 billion to expenditure on AI in 2025, up 62% from 2024, according to JPMorgan Asset Management (Stephanie Allaga, 2025).</p>
+                    <p>This leads me to ask the question that Wall Street prefers investors not to ask, how much of this is true? How much of this is a mirage that ends in catastrophe, like in 2000?</p>
+
+                    <h4>The Case For: AI is The New Mecca for Economic growth</h4>
+                    <p>In order to understand why so many respected economists agree, we have to stand in their shoes, and in order to do this, we must first delve into US national accounts. The first number that caught my eye was the real GDP growth which was because of Information processing equipment, which grew by 0.9% points. This surpasses the contribution of IT components in the dot com boom (St. Louis Fed 2026). A change this huge cannot be incidental nor a statistical quirk. It signals real growth in productivity through the fresh capital deployed across the US. Beyond physical components such as computer chips and processors, investment in AI related software rose at a 23% annualised rate in the first half of 2025, total investment in information processing technology rose 35% over the same period (EY 2025). This points to this new AI boom being more than just a speculation spike, but real resources being put into economic growth.</p>
+                    <p>Another argument for AI being a growth driver for the economy is also in the numbers. What the dot com boom failed in was to increase real productivity. This new AI boom is proving different as AI use across most occupations have risen significantly since 2024, from 12% in 2024 to 26% in 2025, doubling in the period of one year. Researchers estimate this to cause a rise in real output by 1.4-2.8% (Phys.org 2026). This gain in productivity proves the AI boom to be the more successful advancement in technology for the economy compared to the dot com boom, undermining the statements made, saying AI is replacing workers. Contrarily, it allows workers to do more than before.</p>
+                    <p>Finally, the geographic aspect adds another layer of evidence. The AI boom has mainly created economic welfare for a select handful of countries, the US being the obvious main beneficiary. This sustained increase in AI capital expenditure seen from the US is forecasted to outgrow the Eurozone and the UK combined in 2026 (Laweconcenter.org 2026). This divergence signals an international growth ‘inequality’ in the near future, on a macroeconomic level, favoring the US due to current heavy investments. This divergence is often caused by one or a few causal factors, The British economy peaking in the 19th century due to naval technology, The boom in middle eastern economies in the 1960s due to the discovery of petroleum, and now the breakthroughs in AI and information processing technology in the States. When this one factor shows up consistently across investment data, the case for AI developments being mere financial noise becomes hard to back.</p>
+                    <p>None of these arguments claim the transition into the AI era would be smooth or risk free. According to pwc, a case study found that ¾ of AI’s economic value is held by ⅕ of organisations (pwc 2026). This raises some eyebrows about whether this GDP growth translates into the wider population's productivity. The long run productivity gains could take decades to come to fruition, like with computing in the 1980s, but the investments in capital, infrastructure and software are real. The question is not whether AI is contributing to growth. It’s whether that growth is sustainable or not.</p>
+
+                    <h4>The Case Against: The mechanics of the bubble and limits of growth</h4>
+                    <p>The preceding section made a compelling case for AI backed growth, however we can now analyse the case against and compare these at the end.</p>
+                    <p>Let’s look at the basic arithmetics behind what is being claimed. Alphabet, Amazon, Microsoft and Meta alone allocated $300 billion to AI related capital expenditure in 2025, spending roughly 1.3% of the US’ GDP on AI hardware and infrastructure. This is projected to rise to an astonishing 1.6% in 2026. Yet against the opening of the spending floodgates, AI is only estimated to have brought in less than $50 billion. OpenAI, the most prominent firm in this sector, operated at a $8 billion loss in 2025, and a projected $17 billion operational loss in 2026 (Yahoo Finance 2026). In no organic economic framework does an industry sustaining losses at this magnitude represent a healthy signal of productive investment. It is a risky gamble on the future, spring loaded with leverage that is ready to snap.</p>
+                    <p>I will quote Hyman Minsky’s theory on economic sustainability here, Minsky hypothesis was that stability causes instability. Long periods of low volatility and easy credit encourages riskier investments, until the system plunges into instability. This can be applied to the AI industry, where valuations seem to just rise, justifying heavier capital expenditure. Rising spending signals future demand, this is what investors are looking for, and justifies even more speculation. This blows up the value of AI giants, with no second thought about current cash flow.</p>
+                    <p>This valuation picture is equally troubling when examined historically. The Shiller periodically adjusted the price-to-earnings ratio to over 40 for the first time since the dot com crash, with the S&P 500 trading at 23 times forward earnings, which is a sign of trust from investors believing that firms will operate flawlessly for decades when these infant industry firms had barely established a path to profitability yet. Market concentration has reached dangerous levels, with AI related investments driving up to 90% of major index gains since 2022. This creates a vulnerable playing ground, held together by consumer and investor confidence (EY 2025).</p>
+                    <p>Finally, let’s take a look at the bottlenecks to growth, on top of the infrastructure-revenue imbalance that has arisen in recent years. This includes the energy and grid capacity, a problem which is very difficult to overcome. Data centers use immense amounts of energy, which will only worsen in the future as AI becomes more widespread and prevalent in workspaces. This would push aging power grids to the limit, forcing the major investors of AI to allocate even more capital expenditure directly into energy infrastructure, potentially independent nuclear or green energy plants to power data centers. The other major limit to growth is the exhaustion of the supply of high quality human generated text and code available on the open internet. This means that there is a certain ceiling to this AI expansion. The technological advances will slow as the growth exponentiates, due to invisible resistance in code and other factors that eventually creep in.</p>
+
+                    <h4>Conclusion</h4>
+                    <p>The macroeconomic trajectory of the AI boom is neither purely a productive revolution nor entirely a market mirage, it is a collision of both which is unfolding rapidly into an outcome that economists cannot agree upon. The evident developments in information processing and its tangible spike in real output proves that artificial intelligence has bypassed Solow’s productivity paradox, unlike the early computing era, AI is already infused into many workplaces and created a meaningful real increase in productivity. On the other hand, the financial buildup behind the AI bubble is extremely fragile. When over $300 billion is poured in with an outcome of $50 billion in realized revenue, the bigger picture most definitely exhibits Hyman Minsky’s Instability hypothesis. The sustained ‘stability’ and speculative euphoria of the market has created a massive oversight of fundamental problems such as physical limitations. Wall Street is pricing the market in an exponential growth curve which physics and simple cash-flow numbers cannot sustain. Therefore, a significant market correction is not just probable, it is structurally necessary. Now I would like to ask the question: how bad would this crash really be? A financial crash isn’t always caused by technological failure, if we look at the dot com bubble, the financial crash vapourised trillions in paper wealth but left behind a legacy in optic fibers across continents that gave birth to the modern internet. The infrastructure being built cannot be wiped away in a market crash, leading me to believe that there is a future with AI integrated into workplaces, improving human efficiency daily.</p>
+                    <p>As the Knicks take the court in Madison Square Garden again in 2026, economists and investors alike would be wise to brace for the inevitable AI bubble ‘sneeze’. In the short run, financial consequences are highly likely to be inflicted just a few blocks down on Wall Street.</p>
+
+                    <h4>References</h4>
+                    <ul>
+                        <li>Boussour, L. (2025a). AI-powered growth: GenAI as a new engine of US economic performance. [online] Ey.com. Available at: <a href="https://www.ey.com/en_us/insights/ai/ai-powered-growth" target="_blank" style="color: var(--accent-color);">https://www.ey.com/en_us/insights/ai/ai-powered-growth</a>.</li>
+                        <li>JPMorgan (2025). Is AI already driving U.S. growth? [online] Jpmorgan.com. Available at: <a href="https://am.jpmorgan.com/us/en/asset-management/adv/insights/market-insights/market-updates/on-the-minds-of-investors/is-ai-already-driving-us-growth/" target="_blank" style="color: var(--accent-color);">https://am.jpmorgan.com/us/en/asset-management/...</a>.</li>
+                        <li>Laird, J. (2026). OpenAI’s own forecast predicts $14 billion loss in 2026 but Nvidia-style $100 billion revenues by 2029 according to new report. [online] Yahoo Finance. Available at: <a href="https://finance.yahoo.com/news/openais-own-forecast-predicts-14-150445813.html" target="_blank" style="color: var(--accent-color);">https://finance.yahoo.com/news/...</a>.</li>
+                        <li>Makridis, C. and Zinin, A. (2026). Industries most exposed to AI are not only seeing productivity gains but jobs and wage growth too. [online] Phys.org. Available at: <a href="https://phys.org/news/2026-04-industries-exposed-ai-productivity-gains.html" target="_blank" style="color: var(--accent-color);">https://phys.org/news/...</a> [Accessed 8 Jun. 2026].</li>
+                        <li>PricewaterhouseCoopers (2026). Three-quarters of AI’s economic gains are being captured by just 20% of companies – with the leading companies focused on growth, not just productivity. [online] PwC. Available at: <a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-performance-study.html" target="_blank" style="color: var(--accent-color);">https://www.pwc.com/gx/en/...</a>.</li>
+                        <li>Rubinton, H. and Patro, B.A. (2026). Tracking AI’s Contribution to GDP Growth. [online] Stlouisfed.org. Available at: <a href="https://www.stlouisfed.org/on-the-economy/2026/jan/tracking-ai-contribution-gdp-growth" target="_blank" style="color: var(--accent-color);">https://www.stlouisfed.org/...</a>.</li>
+                        <li>Zúñiga, M.A. (2026). AI, Productivity, and Labor Markets: A Review of the Empirical Evidence - International Center for Law & Economics. [online] International Center for Law & Economics. Available at: <a href="https://laweconcenter.org/resources/ai-productivity-and-labor-markets-a-review-of-the-empirical-evidence/" target="_blank" style="color: var(--accent-color);">https://laweconcenter.org/...</a>.</li>
+                    </ul>
+                </div>
+            </div>
+
         </article>
     </main>
 
@@ -604,12 +652,12 @@
         <p>&copy; 2026 Ion Hamers. Based in Swansea, Wales.</p>
         <p style="margin-top: 10px;">Contact: <a href="mailto:Ionhamers@gmail.com" style="color: var(--accent-color); text-decoration: none;">Ionhamers@gmail.com</a> | <a href="tel:07407503806" style="color: var(--accent-color); text-decoration: none;">07407503 806</a></p>
         
-        <p class="footer-credit">Website designed by <span>Gemini Website Maker</span></p>
+        <p class="footer-credit">Website designed using <span>Gemini Website Maker</span></p>
     </footer>
 
     <script>
         function openEssay(essayId, bookElement) {
-            // Manage Active States
+            // Manage Active States for books
             const allBooks = document.querySelectorAll('.book');
             allBooks.forEach(b => b.classList.remove('active'));
             bookElement.classList.add('active');
@@ -624,7 +672,7 @@
             
             document.getElementById(essayId).classList.add('active');
 
-            // Scroll to Content
+            // Scroll to Content cleanly
             setTimeout(() => {
                 document.getElementById('reading-desk').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
@@ -645,7 +693,7 @@
             
             document.getElementById('profile-content').classList.add('active');
 
-            // Scroll to Content
+            // Scroll to Content cleanly
             setTimeout(() => {
                 document.getElementById('reading-desk').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
